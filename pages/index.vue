@@ -14,8 +14,7 @@
 </template> 
 
 <script setup>
-import { getTopVideo, getFollowVideo, getSuggestVideo } from '~/service/login/index';
-
+import { LivestreamApi } from '~/service/Livestream/index';
 const lstFake = ref([
   {
     "video_id": "1b263e93-3485-4bf7-9719-4a709733c630",
@@ -111,37 +110,34 @@ const lstFake = ref([
 ])
 
 const { data, error } = await useAsyncData('fetchData', async () => {
-  if (process.server) {
-    console.log('Running on the server');
-  } else if (process.client) {
-    console.log('Running on the client');
-  }
-
   try {
-    const resTopvideo = await getTopVideo();
-    return {
-      lstTopVideo: resTopvideo.Data || []
-    }
-    // const [
-    //   resTopvideo,
-    //   resFollowVideo,
-    //   resSuggestVideo
-    // ] = await Promise.all([
-    //   getTopVideo(),
-    //   getFollowVideo(),
-    //   getSuggestVideo()
-    // ])
+    const [
+      resTopvideo,
+      resFollowVideo,
+      resSuggestVideo
+    ] = await Promise.all([
+      useAxios(LivestreamApi.TopVideo, { method: 'get' }),
+      useAxios(LivestreamApi.FollowVideo, { method: 'get' }),
+      useAxios(LivestreamApi.SuggestVideo, { method: 'get' }),
+    ])
 
     // console.log("resTopvideo", resTopvideo.Data);
     // console.log("resFollowVideo", resFollowVideo.Data);
     // console.log("resSuggestVideo", resSuggestVideo.Data);
+
+    const resB = await useAxios(LivestreamApi.FollowVideo, { method: 'get' });
+    console.log("resB.Data");
+    const resA = await useAxios(LivestreamApi.TopVideo, { method: 'get' });
+    console.log("resA.Data");
     
-    // // Return the results as an object
-    // return {
-    //   lstTopVideo: resTopvideo.Data,
-    //   lstFollowVideo: resFollowVideo.Data,
-    //   lstSuggestVideo: resSuggestVideo.Data
-    // }
+    
+    // Return the results as an object
+    return {
+      lstTopVideo: resTopvideo.Data,
+      lstFollowVideo: resFollowVideo.Data,
+      lstSuggestVideo: resSuggestVideo.Data
+    }
+    // return [];
   } catch (error) {
     console.log(error);
     return [];
