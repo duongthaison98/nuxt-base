@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig() // Now we call this inside a valid context
+  const token = useCookie('token').value
 
   const service = axios.create({
     baseURL: config.public.baseURL, // Using runtime config properly
@@ -9,7 +10,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Add any interceptors or global settings to the service instance
   service.interceptors.request.use((config) => {
-    const token = useCookie('token').value
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }

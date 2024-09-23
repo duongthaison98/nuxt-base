@@ -144,6 +144,7 @@ const { data, error } = await useAsyncData('fetchData', async () => {
     // }
   } catch (error) {
     console.log(error);
+    return [];
   }
 })
 
