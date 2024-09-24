@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       baseURL: process.env.BASE_URL || 'http://localhost:3000',
     },
   },
-  // experimental: {
-  //   asyncContext: true
-  // }
+  experimental: {
+    asyncContext: true
+  }
 })
