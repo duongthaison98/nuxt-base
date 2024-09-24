@@ -1,0 +1,8 @@
+// Mixins for reusable style logic
+@mixin responsive-text($size) {
+  font-size: $size;
+
+  @media (max-width: 768px) {
+    font-size: $size * 0.8;
+  }
+}

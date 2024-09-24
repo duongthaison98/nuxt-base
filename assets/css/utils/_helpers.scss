@@ -1,0 +1,20 @@
+// Utility classes (e.g., text-center, float-left)
+.bg-main {
+  background-color: $primary-color; // Example primary color
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}

@@ -1,0 +1,19 @@
+// SASS/SCSS functions
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  @include flex-center;
+  @include border-radius(5px);
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  @include box-shadow();
+}

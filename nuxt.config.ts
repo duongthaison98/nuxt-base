@@ -4,10 +4,27 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   runtimeConfig: {
     public: {
-      baseURL: process.env.BASE_URL || 'http://localhost:3000',
+      baseURL: process.env.BASE_URL || 'http://localhost:3000'
     },
   },
   experimental: {
     asyncContext: true
+  },
+  css: [
+    '~/assets/css/main.scss'
+  ],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/image'],
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui'
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: "modern"
+        }
+      }
+    }
   }
 })

@@ -1,0 +1,17 @@
+// Styles specific to buttons
+.btn-custom {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  background-image: linear-gradient(90deg, #d9484e, #e64186, #e64186, #d9484e);
+  background-size: 300% 100%;
+
+  &:hover {
+    background-position: 100% 0;
+  }
+}
