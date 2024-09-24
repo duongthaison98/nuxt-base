@@ -25,17 +25,20 @@ const { data, error } = await useAsyncData('fetchData', async () => {
     const [
       resTopvideo,
       resFollowVideo,
-      resSuggestVideo
+      resSuggestVideo,
+      resVideoInfo
     ] = await Promise.all([
-      $useAxios(LivestreamApi.TopVideo, { method: 'get' }),
-      $useAxios(LivestreamApi.FollowVideo, { method: 'get' }),
-      $useAxios(LivestreamApi.SuggestVideo, { method: 'get' }),
+      $useAxios(LivestreamApi.getTopVideo, { method: 'get' }),
+      $useAxios(LivestreamApi.getFollowVideo, { method: 'get' }),
+      $useAxios(LivestreamApi.getSuggestVideo, { method: 'get' }),
+      $useAxios(LivestreamApi.getVideoByShortId('TXnuoJP6yKtrDYhvsb9Mq6'), { method: 'get' })
     ])
     
     return {
       lstTopVideo: resTopvideo.Data,
       lstFollowVideo: resFollowVideo.Data,
-      lstSuggestVideo: resSuggestVideo.Data
+      lstSuggestVideo: resSuggestVideo.Data,
+      videoInfo: resVideoInfo.Data
     }
   } catch (error) {
     console.log(error);

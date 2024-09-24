@@ -1,7 +1,8 @@
 const entryPoint = '/livestream/api/v1.0/video';
 
 export const LivestreamApi = {
-  TopVideo: `${entryPoint}/top`,
-  FollowVideo: `${entryPoint}/follow`,
-  SuggestVideo: `${entryPoint}/suggestions`
+  getTopVideo: `${entryPoint}/top`,
+  getFollowVideo: `${entryPoint}/follow`,
+  getSuggestVideo: `${entryPoint}/suggestions`,
+  getVideoByShortId: (id: string) => `${entryPoint}/detail/short/${id}`
 }
