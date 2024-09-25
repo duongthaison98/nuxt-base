@@ -5,10 +5,11 @@
     </div>
     <div v-else-if="!data">...loading</div>
     <div v-else>
-      <div class="container px-52 mt-10">
+      <div class="container px-52 mt-10 mx-auto">
+        <Button variant="outline">Button</Button>
         <div v-for="(item, index) in data.lstTopVideo" :key="index" class="mb-10">
           <p class="text-2xl font-bold">{{ item.title }}</p>
-          <NuxtImg :src="item.thumbnail" alt="" />
+          <NuxtImg :src="item.thumbnail" class="w-full" alt="" />
         </div>
       </div>
     </div>
