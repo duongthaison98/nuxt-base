@@ -13,7 +13,11 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.scss'
   ],
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxt/image'],
+  modules: [
+    '@nuxtjs/tailwindcss', 
+    'shadcn-nuxt', 
+    '@nuxt/image'
+  ],
   shadcn: {
     prefix: '',
     componentDir: './components/ui'
