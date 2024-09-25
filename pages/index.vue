@@ -17,9 +17,9 @@
 </template> 
 
 <script setup lang="ts">
-import { LivestreamApi } from '~/service/Livestream/index';
+import LiveRepository from '~/repositories/LiveRepository/index';
 
-const { $useAxios }: any = useNuxtApp();
+const liveRepo = new LiveRepository(useNuxtApp().$service); 
 
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
@@ -27,14 +27,14 @@ const { data, error } = await useAsyncData('fetchData', async () => {
       resTopvideo,
       resFollowVideo,
       resSuggestVideo,
-      resVideoInfo
     ] = await Promise.all([
-      $useAxios(LivestreamApi.getTopVideo, { method: 'get' }),
-      $useAxios(LivestreamApi.getFollowVideo, { method: 'get' }),
-      $useAxios(LivestreamApi.getSuggestVideo, { method: 'get' }),
-      $useAxios(LivestreamApi.getVideoByShortId('TXnuoJP6yKtrDYhvsb9Mq6'), { method: 'get' })
+      liveRepo.getTopVideo(),
+      liveRepo.getFollowVideo(),
+      liveRepo.getSuggestVideo(),
     ])
     
+    const resVideoInfo = await liveRepo.getVideoByShortId(resTopvideo.Data[0].short_uuid);    
+
     return {
       lstTopVideo: resTopvideo.Data,
       lstFollowVideo: resFollowVideo.Data,
