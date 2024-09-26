@@ -61,7 +61,8 @@ function pushNoti() {
   store.increment();
   toast({
     title: 'Thành công',
-    variant: 'info',
+    variant: 'default',
+    duration: 2000
   });
 }
 </script>
