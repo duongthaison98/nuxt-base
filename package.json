@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.8.0",
+    "@pinia/nuxt": "^0.5.4",
     "@radix-icons/vue": "^1.0.0",
     "@vueuse/core": "^11.1.0",
     "axios": "^1.7.7",
@@ -19,6 +20,7 @@
     "embla-carousel-vue": "^8.3.0",
     "lucide-vue-next": "^0.445.0",
     "nuxt": "^3.13.0",
+    "pinia": "^2.2.2",
     "radix-vue": "^1.9.6",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",

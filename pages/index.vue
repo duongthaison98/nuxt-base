@@ -7,6 +7,7 @@
     <div v-else>
       <div class="container px-52 mt-10 mx-auto">
         <Button variant="outline" @click="pushNoti()">Button</Button>
+        <div>counter {{ store.count }}</div>
         <Carousel class="relative w-full max-w-xs">
           <CarouselContent>
             <CarouselItem v-for="(item, index) in data.lstTopVideo" :key="index">
@@ -23,8 +24,11 @@
 <script setup lang="ts">
 import LiveRepository from '~/repositories/LiveRepository/index';
 import { useToast } from '@/components/ui/toast/use-toast'
+import { useCounterStore } from '@/stores/index';
 
 const { toast } = useToast()
+const store = useCounterStore()
+
 
 const liveRepo = new LiveRepository(useNuxtApp().$service); 
 const { data, error } = await useAsyncData('fetchData', async () => {
@@ -53,9 +57,10 @@ const { data, error } = await useAsyncData('fetchData', async () => {
   }
 })
 
-function pushNoti() {  
+function pushNoti() {
+  store.increment();
   toast({
-    title: 'Scheduled: Catch up',
+    title: 'Thành công',
     variant: 'info',
   });
 }
