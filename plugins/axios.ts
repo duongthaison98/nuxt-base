@@ -31,5 +31,5 @@ export default defineNuxtPlugin((nuxtApp: NuxtApp) => {
     }
   )
 
-  nuxtApp.provide('service', service);
+  nuxtApp.provide('axios', service);
 })

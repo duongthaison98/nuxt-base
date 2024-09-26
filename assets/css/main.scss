@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  font-weight: 500;
+  src: url('../fonts/Montserrat-VariableFont_wght.ttf');
+}
+
 @import 'base/reset';
 @import 'base/variables';
 @import 'base/typography';
@@ -12,3 +19,32 @@
 @import 'utils/mixins';
 @import 'utils/helpers';
 @import 'utils/functions';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #464646;
+  font-family: "Montserrat", sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f12a31; 
+}

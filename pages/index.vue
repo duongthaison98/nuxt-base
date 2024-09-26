@@ -1,68 +1,34 @@
 <template>
-  <div>
-    <div v-if="error">
-      <p>Error loading data: {{ error.message }}</p>
-    </div>
-    <div v-else-if="!data">...loading</div>
-    <div v-else>
-      <div class="container px-52 mt-10 mx-auto">
-        <Button variant="outline" @click="pushNoti()">Button</Button>
-        <div>counter {{ store.count }}</div>
-        <Carousel class="relative w-full max-w-xs">
-          <CarouselContent>
-            <CarouselItem v-for="(item, index) in data.lstTopVideo" :key="index">
-              <NuxtImg :src="item.thumbnail" class="w-full" alt="" />
-            </CarouselItem>
-          </CarouselContent>
-        </Carousel>
+  <div class="home-page h-[100svh] ">
+    <div class="banner"></div>
+    <div class="form-wrap relative">
+      <div class="logo">
+        <NuxtImg src="/images/logo.png" class="mx-auto" alt="" />
       </div>
+      <LoginView 
+        @submit="handleLogin"
+      />
     </div>
-    <Toaster />
   </div>
 </template> 
 
 <script setup lang="ts">
-import LiveRepository from '~/repositories/LiveRepository/index';
-import { useToast } from '@/components/ui/toast/use-toast'
-import { useCounterStore } from '@/stores/index';
+import '@/assets/css/pages/_home.scss';
+import LoginView from '~/components/pageComponents/home/Login.vue';
+import UserRepository from '~/repositories/UserRepository/index';
+import { useNotify } from '~/composables/useNotify';
 
-const { toast } = useToast()
-const store = useCounterStore()
+const UserRepo = new UserRepository(useNuxtApp().$axios);
 
-
-const liveRepo = new LiveRepository(useNuxtApp().$service); 
-const { data, error } = await useAsyncData('fetchData', async () => {
+const handleLogin = (data: any) => {
   try {
-    const [
-      resTopvideo,
-      resFollowVideo,
-      resSuggestVideo,
-    ] = await Promise.all([
-      liveRepo.getTopVideo(),
-      liveRepo.getFollowVideo(),
-      liveRepo.getSuggestVideo(),
-    ])
+
+    console.log('data', data.username);
     
-    const resVideoInfo = await liveRepo.getVideoByShortId(resTopvideo.Data[0].short_uuid);    
-
-    return {
-      lstTopVideo: resTopvideo.Data,
-      lstFollowVideo: resFollowVideo.Data,
-      lstSuggestVideo: resSuggestVideo.Data,
-      videoInfo: resVideoInfo.Data
-    }
-  } catch (error) {
+    useNotify('Thành công', 'default');
+  } catch (error: any) {
     console.log(error);
-    return null;
+    useNotify(error, 'destructive');
   }
-})
-
-function pushNoti() {
-  store.increment();
-  toast({
-    title: 'Thành công',
-    variant: 'default',
-    duration: 2000
-  });
 }
 </script>
