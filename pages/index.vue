@@ -6,7 +6,7 @@
     <div v-else-if="!data">...loading</div>
     <div v-else>
       <div class="container px-52 mt-10 mx-auto">
-        <Button variant="outline">Button</Button>
+        <Button variant="outline" @click="pushNoti()">Button</Button>
         <Carousel class="relative w-full max-w-xs">
           <CarouselContent>
             <CarouselItem v-for="(item, index) in data.lstTopVideo" :key="index">
@@ -16,14 +16,17 @@
         </Carousel>
       </div>
     </div>
+    <Toaster />
   </div>
 </template> 
 
 <script setup lang="ts">
 import LiveRepository from '~/repositories/LiveRepository/index';
+import { useToast } from '@/components/ui/toast/use-toast'
+
+const { toast } = useToast()
 
 const liveRepo = new LiveRepository(useNuxtApp().$service); 
-
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
     const [
@@ -49,4 +52,11 @@ const { data, error } = await useAsyncData('fetchData', async () => {
     return null;
   }
 })
+
+function pushNoti() {  
+  toast({
+    title: 'Scheduled: Catch up',
+    variant: 'info',
+  });
+}
 </script>
