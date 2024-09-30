@@ -7,7 +7,7 @@
     <div v-else>
       <div class="container px-52 mt-10 mx-auto">
         <Button variant="outline" @click="pushNoti()">Button</Button>
-        <div>counter {{ store.count }}</div>
+        <div>isAuthenticated {{ isAuthenticated }}</div>
         <Carousel class="relative w-full max-w-xs">
           <CarouselContent>
             <CarouselItem v-for="(item, index) in data.lstTopVideo" :key="index">
@@ -23,11 +23,12 @@
 
 <script setup lang="ts">
 import LiveRepo from '~/repositories/LiveRepository/index';
-import { useToast } from '@/components/ui/toast/use-toast'
-// import { useCounterStore } from '~/stores/auth';
+import { useNotify } from '@/composables/useNotify'
+import { useAuthStore } from '@/stores/auth';
 
-const { toast } = useToast()
-const store = useCounterStore()
+const authStore = useAuthStore();
+
+const isAuthenticated = computed(() => authStore.isAuthenticated);
 
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
@@ -56,11 +57,7 @@ const { data, error } = await useAsyncData('fetchData', async () => {
 })
 
 function pushNoti() {
-  store.increment();
-  toast({
-    title: 'Thành công',
-    variant: 'default',
-    duration: 2000
-  });
+  authStore.isAuthenticated = !authStore.isAuthenticated
+  useNotify('Thành công', 'success');
 }
 </script>

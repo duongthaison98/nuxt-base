@@ -1,12 +1,10 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-export const useCounterStore = defineStore('auth', () => {
-  const count = ref(0)
-  const name = ref('Eduardo')
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+import type { UserInfo } from '@/types';
 
-  return { count, name, doubleCount, increment }
+export const useAuthStore = defineStore('auth', () => {
+  const userInfo = ref<UserInfo | null>(null);
+  const isAuthenticated = ref<boolean>(false);
+
+  return { userInfo, isAuthenticated }
 })

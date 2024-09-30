@@ -17,17 +17,23 @@ import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
 import UserRepo from '~/repositories/UserRepository/index';
 import { useNotify } from '~/composables/useNotify';
+import { useAuthStore } from '@/stores/auth';
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 const handleLogin = async (data: any) => {
   try {
-    await UserRepo.login(data);
+    const resLogin = await UserRepo.login(data);
+    useCookie('access_token').value = resLogin.Data.access_token;
+    useCookie('refresh_token').value = resLogin.Data.refresh_token;
+
+    const resUserInfo = await UserRepo.getUserInfo();
+    authStore.userInfo = resUserInfo.Data;
+
+    authStore.isAuthenticated = true;
     
-
     router.push('/live');
-
-    useNotify('Thành công', 'default');
   } catch (error: any) {
     console.log(error);
     useNotify(error, 'destructive');

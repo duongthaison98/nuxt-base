@@ -2,7 +2,7 @@ import axios, { type AxiosInstance, AxiosError } from "axios";
 import { useRuntimeConfig, useCookie, refreshCookie } from 'nuxt/app';
 
 const config = useRuntimeConfig();
-const token = useCookie('token').value;
+
 class BaseRepository {
   private $axios: AxiosInstance | null;
   
@@ -16,8 +16,11 @@ class BaseRepository {
     })  
   
     this.$axios.interceptors.request.use((config: any) => {
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+      const accessToken = useCookie('access_token').value;
+      const refreshToken = useCookie('refresh_token').value;
+    
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
       config.data;
       
@@ -33,7 +36,7 @@ class BaseRepository {
       (error: AxiosError) => {
         const { response } = error;
     
-        return response;
+        throw response;
       }
     )
   }
