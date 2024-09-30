@@ -1,9 +1,14 @@
-import BaseRepository from '../BaseRepository';
+import service from "../BaseRepository";
 
 const entryPoint = '/users/api/v2.0';
 
-export default class UserRepository extends BaseRepository {
-  login = () => this.post(`${entryPoint}/account/web-login`);
-  getCaptcha = () => this.get(`${entryPoint}/account/captcha`);
-  register = (data: object) => this.post(`${entryPoint}/account/register`, data);
+const UserRepository = {
+  login(data: { username: string, password: string }) {
+    return service.post(`${entryPoint}/account/login/web`, data);
+  },
+  getUserInfo() {
+    return service.get(`/community/api/v2.0/user-info`);
+  }
 }
+
+export default UserRepository;

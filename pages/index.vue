@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page h-[100svh] ">
+  <div class="home-page h-[100svh]">
     <div class="banner"></div>
     <div class="form-wrap relative">
       <div class="logo">
@@ -15,16 +15,18 @@
 <script setup lang="ts">
 import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
-import UserRepository from '~/repositories/UserRepository/index';
+import UserRepo from '~/repositories/UserRepository/index';
 import { useNotify } from '~/composables/useNotify';
 
-const UserRepo = new UserRepository(useNuxtApp().$axios);
+const router = useRouter();
 
-const handleLogin = (data: any) => {
+const handleLogin = async (data: any) => {
   try {
-
-    console.log('data', data.username);
+    await UserRepo.login(data);
     
+
+    router.push('/live');
+
     useNotify('Thành công', 'default');
   } catch (error: any) {
     console.log(error);

@@ -22,15 +22,13 @@
 </template> 
 
 <script setup lang="ts">
-import LiveRepository from '~/repositories/LiveRepository/index';
+import LiveRepo from '~/repositories/LiveRepository/index';
 import { useToast } from '@/components/ui/toast/use-toast'
-import { useCounterStore } from '@/stores/index';
+// import { useCounterStore } from '~/stores/auth';
 
 const { toast } = useToast()
 const store = useCounterStore()
 
-
-const liveRepo = new LiveRepository(useNuxtApp().$axios); 
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
     const [
@@ -38,12 +36,12 @@ const { data, error } = await useAsyncData('fetchData', async () => {
       resFollowVideo,
       resSuggestVideo,
     ] = await Promise.all([
-      liveRepo.getTopVideo(),
-      liveRepo.getFollowVideo(),
-      liveRepo.getSuggestVideo(),
+      LiveRepo.getTopVideo(),
+      LiveRepo.getFollowVideo(),
+      LiveRepo.getSuggestVideo(),
     ])
     
-    const resVideoInfo = await liveRepo.getVideoByShortId(resTopvideo.Data[0].short_uuid);    
+    const resVideoInfo = await LiveRepo.getVideoByShortId(resTopvideo.Data[0].short_uuid);    
 
     return {
       lstTopVideo: resTopvideo.Data,
