@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div v-if="error">
-      <p>Error loading data: {{ error.message }}</p>
-    </div>
-    <div v-else-if="!data">
+    <Header />
+    <div v-if="!data">
       <Skeleton class="h-[125px] w-[250px] rounded-xl" />
     </div>
     <div v-else>
@@ -24,6 +22,7 @@
 </template> 
 
 <script setup lang="ts">
+import Header from '~/components/layout/Header.vue';
 import LiveRepo from '~/repositories/liveRepository/index';
 import { useNotify } from '@/composables/useNotify'
 import { useAuthStore } from '@/stores/auth';
