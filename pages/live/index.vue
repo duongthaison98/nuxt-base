@@ -33,7 +33,6 @@ const authStore = useAuthStore();
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 
 const { data, error } = await useAsyncData('fetchData', async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   try {
     const [
       resTopvideo,

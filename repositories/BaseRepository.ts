@@ -43,7 +43,7 @@ class BaseRepository {
 
   async get(url: string, params?: object) {
     try {      
-      const response = await this.$axios?.get(url, { params });
+      const response: any = await this.$axios?.get(url, { params });
       return response;
     } catch (error: any) {
       console.log(error);
@@ -52,7 +52,7 @@ class BaseRepository {
 
   async post(url: string, data?: object) {
     try {
-      const response = await this.$axios?.post(url, data);
+      const response: any = await this.$axios?.post(url, data);
       return response;
     } catch (error: any) {
       console.log(error);
@@ -61,7 +61,7 @@ class BaseRepository {
 
   async put(url: string, data?: object) {
     try {
-      const response = await this.$axios?.put(url, data);
+      const response: any = await this.$axios?.put(url, data);
       return response;
     } catch (error: any) {
       console.log(error);
@@ -70,7 +70,7 @@ class BaseRepository {
 
   async delete(url: string, data?: object) {
     try {
-      const response = await this.$axios?.delete(url, data);
+      const response: any = await this.$axios?.delete(url, data);
       return response;
     } catch (error: any) {
       console.log(error);
