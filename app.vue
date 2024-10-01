@@ -27,9 +27,7 @@ const { data, error } = await useAsyncData('fetchData', async () => {
     authStore.userInfo = resUserInfo.data.Data;
   
     authStore.isAuthenticated = true;
-  } catch (error) {
-    console.log("error", error);
-  
+  } catch (error) {  
     useCookie('access_token').value = null;
     useCookie('refresh_token').value = null;
     authStore.isAuthenticated = false;
