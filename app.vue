@@ -1,6 +1,7 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
+    <NuxtLoadingIndicator color="red" />
     <NuxtPage />
     <Toaster />
   </div>

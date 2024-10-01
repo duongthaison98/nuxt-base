@@ -3,7 +3,9 @@
     <div v-if="error">
       <p>Error loading data: {{ error.message }}</p>
     </div>
-    <div v-else-if="!data">...loading</div>
+    <div v-else-if="!data">
+      <Skeleton class="h-[125px] w-[250px] rounded-xl" />
+    </div>
     <div v-else>
       <div class="container px-52 mt-10 mx-auto">
         <Button variant="outline" @click="pushNoti()">Button</Button>
@@ -22,7 +24,7 @@
 </template> 
 
 <script setup lang="ts">
-import LiveRepo from '~/repositories/LiveRepository/index';
+import LiveRepo from '~/repositories/liveRepository/index';
 import { useNotify } from '@/composables/useNotify'
 import { useAuthStore } from '@/stores/auth';
 
@@ -31,6 +33,7 @@ const authStore = useAuthStore();
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 
 const { data, error } = await useAsyncData('fetchData', async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   try {
     const [
       resTopvideo,

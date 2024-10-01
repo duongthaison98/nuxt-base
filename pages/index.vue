@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
-import UserRepo from '~/repositories/UserRepository/index';
+import UserRepo from '~/repositories/userRepository/index';
 import { useNotify } from '~/composables/useNotify';
 import { useAuthStore } from '@/stores/auth';
 

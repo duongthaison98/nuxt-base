@@ -1,4 +1,4 @@
-import service from "../BaseRepository";
+import service from "../baseRepository";
 
 const entryPoint = '/users/api/v2.0';
 

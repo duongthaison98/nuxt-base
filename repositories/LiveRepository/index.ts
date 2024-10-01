@@ -1,4 +1,4 @@
-import service from '../BaseRepository';
+import service from '../baseRepository';
 
 const entryPoint = '/livestream/api/v1.0/video';
 
