@@ -34,7 +34,6 @@ import type { LoginForm } from '@/types';
 import validate from '~/utils/validator';
 import { useNotify } from '~/composables/useNotify';
 
-
 const emit = defineEmits<{
   (e: 'onLogin', payload: LoginForm): void;
 }>();

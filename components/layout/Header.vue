@@ -1,5 +1,5 @@
 <template>
-  <div class="header flex items-center justify-between px-5 py-5 relative">
+  <div class="header flex items-center justify-between px-5 py-3 relative">
     <div class="header-logo">
       <NuxtImg src="/images/nav-logo.svg" width="100" height="40" alt="" />
     </div>

@@ -2,19 +2,19 @@
   <div>
     <Header />
     <div v-if="!data">
-      <Skeleton class="h-[125px] w-[250px] rounded-xl" />
+      <Skeleton class="h-[calc(100svh-5rem] w-[100%]">
+        <div class="md:w-3/4"></div>
+        <div class="md:w-1/4"></div>
+      </Skeleton>
     </div>
-    <div v-else>
-      <div class="container px-52 mt-10 mx-auto">
-        <Button variant="outline" @click="pushNoti()">Button</Button>
-        <div>isAuthenticated {{ isAuthenticated }}</div>
-        <Carousel class="relative w-full max-w-xs">
-          <CarouselContent>
-            <CarouselItem v-for="(item, index) in data.lstTopVideo" :key="index">
-              <NuxtImg :src="item.thumbnail" class="w-full" alt="" />
-            </CarouselItem>
-          </CarouselContent>
-        </Carousel>
+    <div v-else class="live-page-wrap flex flex-wrap h-[calc(100svh-5rem)]">
+      <div class="md:w-3/4">
+        <LiveScreen :thumbnail="data.videoInfo.thumbnail" />
+      </div>
+      <div class="md:w-1/4">
+        <LiveChat
+          :lst-comments="lstComments"
+        />
       </div>
     </div>
     <Toaster />
@@ -23,13 +23,17 @@
 
 <script setup lang="ts">
 import Header from '~/components/layout/Header.vue';
+import LiveScreen from '~/components/pageComponents/livestream/LiveScreen.vue';
+import LiveChat from '~/components/pageComponents/livestream/LiveChat.vue';
 import LiveRepo from '~/repositories/liveRepository/index';
+import type { ListComments } from '@/types';
 import { useNotify } from '@/composables/useNotify'
-import { useAuthStore } from '@/stores/auth';
 
-const authStore = useAuthStore();
-
-const isAuthenticated = computed(() => authStore.isAuthenticated);
+const paramComments = ref<{last_time: string, size: number}>({
+  last_time: '',
+  size: 30
+})
+const lstComments = ref<ListComments>([])
 
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
@@ -37,14 +41,16 @@ const { data, error } = await useAsyncData('fetchData', async () => {
       resTopvideo,
       resFollowVideo,
       resSuggestVideo,
+      resVideoInfo,
+      resMessage
     ] = await Promise.all([
       LiveRepo.getTopVideo(),
       LiveRepo.getFollowVideo(),
       LiveRepo.getSuggestVideo(),
+      LiveRepo.getVideoByShortId("bgzPk26GaZVeFKCeGj59Rb"),
+      getChat()
     ])
     
-    const resVideoInfo = await LiveRepo.getVideoByShortId(resTopvideo.Data[0].short_uuid);    
-
     return {
       lstTopVideo: resTopvideo.Data,
       lstFollowVideo: resFollowVideo.Data,
@@ -57,8 +63,16 @@ const { data, error } = await useAsyncData('fetchData', async () => {
   }
 })
 
-function pushNoti() {
-  authStore.isAuthenticated = !authStore.isAuthenticated
-  useNotify('Thành công', 'success');
+async function getChat() {
+  try {
+    paramComments.value.last_time = '';
+    const res = await LiveRepo.getAllMessage("4f918f54-112d-4a78-ac00-b65a55f90592", paramComments.value)
+    lstComments.value = res.Data.reverse();    
+
+    console.log("lstComments.value", lstComments.value);
+    
+  } catch (error) {
+    console.log(error);  
+  }
 }
 </script>
