@@ -1,9 +1,9 @@
 <template>
   <div class="header flex items-center justify-between px-5 py-5 relative">
-    <div>
-      <NuxtImg src="/images/nav-logo.svg" alt="" />
+    <div class="header-logo">
+      <NuxtImg src="/images/nav-logo.svg" width="100" height="40" alt="" />
     </div>
-    <div class="box-user ">
+    <div class="box-user">
       <div class="flex items-center">
         <NuxtImg :src="authStore.userInfo?.avatar_url || '/images/no_ava.png'" width="40" height="40" class="rounded-full" />
         <div class="text-yellow-500 ml-3 text-xl">{{ authStore.userInfo?.user_name }}</div>
