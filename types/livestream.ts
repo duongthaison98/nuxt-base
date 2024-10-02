@@ -12,3 +12,9 @@ export interface Comments {
 }
 
 export type ListComments = Comments[];
+
+export interface PayloadChat {
+  channel_id: string;
+  content: string;
+  text_color: string;
+}

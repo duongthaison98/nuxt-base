@@ -18,9 +18,11 @@ import LoginView from '~/components/pageComponents/home/Login.vue';
 import UserRepo from '~/repositories/userRepository/index';
 import { useNotify } from '~/composables/useNotify';
 import { useAuthStore } from '@/stores/auth';
+import { useChatStore } from '@/stores/chat';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const chatStore = useChatStore();
 
 const handleLogin = async (data: any) => {
   try {
@@ -32,6 +34,8 @@ const handleLogin = async (data: any) => {
     authStore.userInfo = resUserInfo.Data;
 
     authStore.isAuthenticated = true;
+
+    chatStore.chatColor = getRandomChatColor();
     
     router.push('/live');
   } catch (error: any) {
