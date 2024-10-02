@@ -36,45 +36,29 @@ class BaseRepository {
       (error: AxiosError) => {
         const { response } = error;
     
-        throw response;
+        throw response?.data;
       }
     )
   }
 
   async get(url: string, params?: object) {
-    try {      
-      const response: any = await this.$axios?.get(url, { params });
-      return response;
-    } catch (error: any) {
-      console.log(error);
-    }
+    const response: any = await this.$axios?.get(url, { params });
+    return response;
   }
 
   async post(url: string, data?: object) {
-    try {
-      const response: any = await this.$axios?.post(url, data);
-      return response;
-    } catch (error: any) {
-      console.log(error);
-    }
+    const response: any = await this.$axios?.post(url, data);
+    return response;
   }
 
   async put(url: string, data?: object) {
-    try {
-      const response: any = await this.$axios?.put(url, data);
-      return response;
-    } catch (error: any) {
-      console.log(error);
-    }
+    const response: any = await this.$axios?.put(url, data);
+    return response;
   }
 
   async delete(url: string, data?: object) {
-    try {
-      const response: any = await this.$axios?.delete(url, data);
-      return response;
-    } catch (error: any) {
-      console.log(error);
-    }
+    const response: any = await this.$axios?.delete(url, data);
+    return response;
   }
 }
 
