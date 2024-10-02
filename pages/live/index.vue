@@ -102,7 +102,7 @@ async function handleSendChat(chatValue: string, color: string) {
     isDoneChat.value = true;
   } catch (error) {
     console.log(error);
-    useNotify(error, 'default');
+    useNotify('Đã có lỗi xảy ra', 'default');
   }
 }
 </script>
