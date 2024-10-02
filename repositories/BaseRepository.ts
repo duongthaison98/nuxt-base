@@ -46,18 +46,18 @@ class BaseRepository {
     return response;
   }
 
-  async post(url: string, data?: object) {
-    const response: any = await this.$axios?.post(url, data);
+  async post(url: string, payload?: object) {
+    const response: any = await this.$axios?.post(url, payload);
     return response;
   }
 
-  async put(url: string, data?: object) {
-    const response: any = await this.$axios?.put(url, data);
+  async put(url: string, payload?: object) {
+    const response: any = await this.$axios?.put(url, payload);
     return response;
   }
 
-  async delete(url: string, data?: object) {
-    const response: any = await this.$axios?.delete(url, data);
+  async delete(url: string, payload?: object) {
+    const response: any = await this.$axios?.delete(url, payload);
     return response;
   }
 }
