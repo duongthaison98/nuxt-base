@@ -1,13 +1,8 @@
 <template>
   <div class="live-chat-wrap flex flex-col h-[calc(100svh-5rem)] w-full p-[10px] bg-black">
-    <div class="channel-title flex items-center justify-between text-xl font-bold uppercase text-white mb-3">
-      <div class="flex items-center">
-        <NuxtImg class="mr-3" src="/images/video.svg" width="20" height="20" alt="" />
-        <span>live chat</span>
-      </div>
-      <div class="collapse-live">
-        <NuxtImg src="/images/collapse.svg" width="20" height="20" alt="" />
-      </div>
+    <div class="channel-title flex items-center text-xl font-bold uppercase text-white mb-3">
+      <NuxtImg class="mr-3" src="/images/video.svg" width="20" height="20" alt="" />
+      <span>live chat</span>
     </div>
     <div class="chat-list flex-1 overflow-y-scroll">
       <div 

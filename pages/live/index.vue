@@ -37,7 +37,7 @@ import { useNotify } from '@/composables/useNotify'
 
 const paramComments = ref<{last_time: number | string, size: number}>({
   last_time: '',
-  size: 30
+  size: 50
 })
 const isDoneChat = ref<boolean>(false);
 
