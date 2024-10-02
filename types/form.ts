@@ -17,3 +17,5 @@ export interface RegisterForm {
   CaptchaId: string;
   CaptchaValue: string;
 }
+
+export type CurrentForm = 'login' | 'register' | 'forget_pass';

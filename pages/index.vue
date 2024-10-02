@@ -24,6 +24,7 @@ import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
 import RegisterView from '~/components/pageComponents/home/Register.vue';
 import UserRepo from '~/repositories/userRepository/index';
+import type { CurrentForm, LoginForm } from '@/types';
 import { useNotify } from '~/composables/useNotify';
 import { useAuthStore } from '@/stores/auth';
 import { useChatStore } from '@/stores/chat';
@@ -32,12 +33,12 @@ const router = useRouter();
 const authStore = useAuthStore();
 const chatStore = useChatStore();
 
-const currentForm = ref<'login' | 'register' | 'forget_pass'>('login');
-const changeCurrentForm = (value) => {
+const currentForm = ref<CurrentForm>('login');
+const changeCurrentForm = (value: CurrentForm) => {
   currentForm.value = value;
 }
 
-const handleLogin = async (data: any) => {
+const handleLogin = async (data: LoginForm) => {
   try {
     const resLogin = await UserRepo.login(data);
     useCookie('access_token').value = resLogin.Data.access_token;
@@ -51,9 +52,9 @@ const handleLogin = async (data: any) => {
     chatStore.chatColor = getRandomChatColor();
     
     router.push('/live');
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
-    useNotify(error, 'destructive');
+    useNotify(error, 'default');
   }
 }
 </script>

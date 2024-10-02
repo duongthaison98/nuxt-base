@@ -32,10 +32,10 @@ import Header from '~/components/layout/Header.vue';
 import LiveScreen from '~/components/pageComponents/livestream/LiveScreen.vue';
 import LiveChat from '~/components/pageComponents/livestream/LiveChat.vue';
 import LiveRepo from '~/repositories/liveRepository/index';
-import type { ListComments, PayloadChat } from '@/types';
+import type { ListComments, PayloadChat, ListVideo, VideoData } from '@/types';
 import { useNotify } from '@/composables/useNotify'
 
-const paramComments = ref<{last_time: string, size: number}>({
+const paramComments = ref<{last_time: number | string, size: number}>({
   last_time: '',
   size: 30
 })
@@ -58,26 +58,26 @@ const { data, error } = await useAsyncData('fetchData', async () => {
     ])
     
     return {
-      lstTopVideo: resTopvideo.Data,
-      lstFollowVideo: resFollowVideo.Data,
-      lstSuggestVideo: resSuggestVideo.Data,
-      videoInfo: resVideoInfo.Data,
-      lstComments: resMessage.Data.reverse()
+      lstTopVideo: resTopvideo.Data as ListVideo,
+      lstFollowVideo: resFollowVideo.Data as ListVideo,
+      lstSuggestVideo: resSuggestVideo.Data as ListVideo,
+      videoInfo: resVideoInfo.Data as VideoData,
+      lstComments: resMessage.Data.reverse() as ListComments
     }
   } catch (error) {
     console.log(error);
     return null;
-  }  
+  }
 })
 
 async function loadComments() {
   try {
-    if (data.value.lstComments && data.value.lstComments.length > 0) {
+    if (data.value?.lstComments && data.value.lstComments.length > 0) {
       paramComments.value.last_time = data.value.lstComments[0].created_time;
 
       const res = await LiveRepo.getAllMessage("4f918f54-112d-4a78-ac00-b65a55f90592", paramComments.value);
       if (res.Data && res.Data.length > 0) {
-        data.value.lstComments.unshift(...res.Data.reverse());
+        data.value?.lstComments.unshift(...res.Data.reverse());
       }
     }
   } catch (error) {
@@ -97,7 +97,9 @@ async function handleSendChat(chatValue: string, color: string) {
     await LiveRepo.createMessage(payload);
 
     const resMessage = await LiveRepo.getAllMessage("4f918f54-112d-4a78-ac00-b65a55f90592", paramComments.value);
-    data.value.lstComments = resMessage.Data.reverse();
+    if (data.value) {
+      data.value.lstComments = resMessage.Data.reverse();
+    }
 
     isDoneChat.value = true;
   } catch (error) {
@@ -107,9 +109,9 @@ async function handleSendChat(chatValue: string, color: string) {
 }
 
 useHead({
-  title: data.value.videoInfo.title,
+  title: data.value?.videoInfo.title,
   meta: [
-    { name: 'description', content: data.value.videoInfo.description }
+    { name: 'description', content: data.value?.videoInfo.description }
   ]
 })
 </script>

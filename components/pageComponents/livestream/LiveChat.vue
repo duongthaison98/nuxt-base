@@ -48,7 +48,6 @@
 import '@/assets/css/pages/_livestream.scss';
 import type { ListComments } from '@/types';
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { MessageType, CommentStatus } from '@/constants/liveStatus';
 import { useChatStore } from '@/stores/chat';
 

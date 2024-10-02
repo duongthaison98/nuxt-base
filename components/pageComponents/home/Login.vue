@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LoginForm } from '@/types';
+import type { LoginForm, CurrentForm } from '@/types';
 import validate from '~/utils/validator';
 import { useNotify } from '~/composables/useNotify';
 
@@ -53,7 +53,7 @@ const handleSubmit = (() => {
   }
 })
 
-const changeCurrentForm = ((value) => {
+const changeCurrentForm = ((value: CurrentForm) => {
   emit('onChangeCurrentForm', value);
 })
 </script>
