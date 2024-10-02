@@ -33,10 +33,10 @@ class BaseRepository {
       (response: any) => {
         return response.data;
       },
-      (error: AxiosError) => {
+      (error: any) => {
         const { response } = error;
     
-        throw response?.data;
+        throw response?.data.Message;
       }
     )
   }
