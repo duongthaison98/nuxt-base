@@ -105,4 +105,11 @@ async function handleSendChat(chatValue: string, color: string) {
     useNotify('Đã có lỗi xảy ra', 'default');
   }
 }
+
+useHead({
+  title: data.value.videoInfo.title,
+  meta: [
+    { name: 'description', content: data.value.videoInfo.description }
+  ]
+})
 </script>
