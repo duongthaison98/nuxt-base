@@ -12,7 +12,7 @@
     <div class="chat-list flex-1 overflow-y-scroll">
       <div 
         class="chat-item" 
-        v-for="(item, index) in props.lstComments" 
+        v-for="(item, index) in lstComments" 
         :key="index" 
         :class="{ 'chat-user': item.type === MessageType.User }"
       >
@@ -56,14 +56,14 @@ interface Props {
   lstComments: ListComments;
   isDoneChat: boolean
 }
-const props = defineProps<Props>();
+const { lstComments, isDoneChat } = defineProps<Props>();
 const chatStore = useChatStore();
 
 const chatValue = ref<string>('');
 const emit = defineEmits(['onSendChat']);
 
-watch(() => props.isDoneChat, () => {
-  if (props.isDoneChat) {
+watch(() => isDoneChat, () => {
+  if (isDoneChat) {
     chatValue.value = '';
   }
 })
