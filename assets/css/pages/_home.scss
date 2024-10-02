@@ -38,26 +38,6 @@
   }
 }
 
-.btn-login {
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  font-size: 16px;
-  text-transform: uppercase;
-  border-radius: 10px;
-  font-weight: 700;
-  border: none;
-  background-image: linear-gradient(90deg, #d9484e, #e64186, #e64186, #d9484e);
-  background-size: 300% 100%;
-  color: #fff;
-  transition: all .3s ease-in-out;
-  height: auto;
-
-  &:hover {
-    background-position: 100% 0;
-  }
-}
-
 .btn-register-forget {
   color: #ea4335;
   text-transform: uppercase;

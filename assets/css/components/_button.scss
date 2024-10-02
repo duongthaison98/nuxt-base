@@ -1,5 +1,4 @@
-// Styles specific to buttons
-.btn-custom {
+.base-btn {
   width: 100%;
   padding: 20px;
   text-align: center;
@@ -10,6 +9,9 @@
   border: none;
   background-image: linear-gradient(90deg, #d9484e, #e64186, #e64186, #d9484e);
   background-size: 300% 100%;
+  color: #fff;
+  transition: all .3s ease-in-out;
+  height: auto;
 
   &:hover {
     background-position: 100% 0;

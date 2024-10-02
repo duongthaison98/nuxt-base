@@ -21,7 +21,7 @@
           />
           <div v-if="errors.password" class="text-red-500 text-sm">{{ errors.password }}</div>
         </div>
-        <Button type="button" class="btn-login" @click="handleSubmit()">Đăng nhập</Button>
+        <BaseButton @click="handleSubmit()">Đăng nhập</BaseButton>
       </form>
       <div class="register-forget mt-[50px]">
         <a href="javascript:void(0)"  @click="changeCurrentForm('register')" class="btn-register-forget">Đăng ký tài khoản</a>
@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseButton from '~/components/common/BaseButton.vue';
 import type { LoginForm, CurrentForm } from '@/types';
 import { useNotify } from '~/composables/useNotify';
 import { z } from 'zod';

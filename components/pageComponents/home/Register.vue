@@ -57,7 +57,7 @@
           </div>
           <div v-if="errors.captchaValue" class="text-red-500 text-sm">{{ errors.captchaValue }}</div>
         </div>
-        <Button type="button" class="btn-login" @click="handleSubmit()">Đăng ký</Button>
+        <BaseButton @click="handleSubmit()">Đăng ký</BaseButton>
       </form>
       <div class="register-forget mt-[50px]">
         <a href="javascript:void(0)" @click="changeCurrentForm('login')" class="btn-register-forget">Đăng nhập</a>
@@ -67,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseButton from '~/components/common/BaseButton.vue';
 import type { RegisterForm, CurrentForm } from '@/types';
 import { useNotify } from '~/composables/useNotify';
 import { z } from 'zod';
