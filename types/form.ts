@@ -11,7 +11,7 @@ export interface RegisterForm {
   captchaValue: string;
 }
 
-export interface RegisterForm {
+export interface ForgotPassForm {
   UserName: string;
   Email: string;
   CaptchaId: string;
