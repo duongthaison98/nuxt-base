@@ -54,12 +54,19 @@ import { useChatStore } from '@/stores/chat';
 
 interface Props {
   lstComments: ListComments;
+  isDoneChat: boolean
 }
 const props = defineProps<Props>();
 const chatStore = useChatStore();
 
 const chatValue = ref<string>('');
 const emit = defineEmits(['onSendChat']);
+
+watch(() => props.isDoneChat, () => {
+  if (props.isDoneChat) {
+    chatValue.value = '';
+  }
+})
 
 const onSendChat = () => {
   if (!chatValue.value) {

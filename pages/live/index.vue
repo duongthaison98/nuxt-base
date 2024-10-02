@@ -18,6 +18,7 @@
       <div class="md:w-1/4 h-full">
         <LiveChat
           :lst-comments="data.lstComments"
+          :isDoneChat="isDoneChat"
           @onSendChat="handleSendChat"
         />
       </div>
@@ -38,6 +39,7 @@ const paramComments = ref<{last_time: string, size: number}>({
   last_time: '',
   size: 30
 })
+const isDoneChat = ref<boolean>(false);
 
 const { data, error } = await useAsyncData('fetchData', async () => {
   try {
@@ -84,7 +86,9 @@ async function loadComments() {
 }
 
 async function handleSendChat(chatValue: string, color: string) {
-  try {    
+  try {
+    isDoneChat.value = false;
+
     const payload: PayloadChat = {
       channel_id: "4f918f54-112d-4a78-ac00-b65a55f90592",
       content: chatValue,
@@ -94,8 +98,11 @@ async function handleSendChat(chatValue: string, color: string) {
 
     const resMessage = await LiveRepo.getAllMessage("4f918f54-112d-4a78-ac00-b65a55f90592", paramComments.value);
     data.value.lstComments = resMessage.Data.reverse();
+
+    isDoneChat.value = true;
   } catch (error) {
     console.log(error);
+    useNotify(error, 'default');
   }
 }
 </script>
