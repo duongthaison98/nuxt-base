@@ -8,10 +8,12 @@
       <LoginView
         v-show="currentForm === 'login'"
         @onLogin="handleLogin"
+        @onChangeCurrentForm="changeCurrentForm"
       />
       <RegisterView
         v-show="currentForm === 'register'"
         @onLogin="handleLogin"
+        @onChangeCurrentForm="changeCurrentForm"
       />
     </div>
   </div>
@@ -31,6 +33,9 @@ const authStore = useAuthStore();
 const chatStore = useChatStore();
 
 const currentForm = ref<'login' | 'register' | 'forget_pass'>('login');
+const changeCurrentForm = (value) => {
+  currentForm.value = value;
+}
 
 const handleLogin = async (data: any) => {
   try {

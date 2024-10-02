@@ -22,7 +22,7 @@
         <Button type="button" class="btn-login" @click="handleSubmit()">Đăng nhập</Button>
       </form>
       <div class="register-forget mt-[50px]">
-        <a href="javascript:void(0)" class="btn-register-forget">Đăng ký tài khoản</a>
+        <a href="javascript:void(0)"  @click="changeCurrentForm('register')" class="btn-register-forget">Đăng ký tài khoản</a>
         <a href="javascript:void(0)" class="btn-register-forget mb-0">Quên mật khẩu</a>
       </div>
     </div>
@@ -34,9 +34,7 @@ import type { LoginForm } from '@/types';
 import validate from '~/utils/validator';
 import { useNotify } from '~/composables/useNotify';
 
-const emit = defineEmits<{
-  (e: 'onLogin', payload: LoginForm): void;
-}>();
+const emit = defineEmits(['onLogin', 'onChangeCurrentForm']);
 
 const formLogin = ref<LoginForm>({
   username: "",
@@ -53,5 +51,9 @@ const handleSubmit = (() => {
     console.log(error);
     useNotify(error, 'default');
   }
+})
+
+const changeCurrentForm = ((value) => {
+  emit('onChangeCurrentForm', value);
 })
 </script>
