@@ -32,7 +32,7 @@
       <div class="chat-input w-full mr-2">
         <Input
           v-model="chatValue" 
-          class="chat-input-cmt" 
+          class="chat-input-cmt bg-[#ffffff1a] h-[40px] text-white rounded-[6px] p-[10px] w-full border-none text-base" 
           placeholder="Nội dung ..." 
           @keydown.enter="onSendChat"
         />
