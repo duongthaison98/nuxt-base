@@ -5,7 +5,12 @@
       <div class="logo">
         <NuxtImg src="/images/logo.png" width="280" height="169" class="mx-auto" alt="" />
       </div>
-      <LoginView 
+      <LoginView
+        v-show="currentForm === 'login'"
+        @onLogin="handleLogin"
+      />
+      <RegisterView
+        v-show="currentForm === 'register'"
         @onLogin="handleLogin"
       />
     </div>
@@ -15,6 +20,7 @@
 <script setup lang="ts">
 import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
+import RegisterView from '~/components/pageComponents/home/Register.vue';
 import UserRepo from '~/repositories/userRepository/index';
 import { useNotify } from '~/composables/useNotify';
 import { useAuthStore } from '@/stores/auth';
@@ -23,6 +29,8 @@ import { useChatStore } from '@/stores/chat';
 const router = useRouter();
 const authStore = useAuthStore();
 const chatStore = useChatStore();
+
+const currentForm = ref<'login' | 'register' | 'forget_pass'>('login');
 
 const handleLogin = async (data: any) => {
   try {
