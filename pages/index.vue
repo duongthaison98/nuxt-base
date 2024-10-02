@@ -26,7 +26,7 @@
 import '@/assets/css/pages/_home.scss';
 import LoginView from '~/components/pageComponents/home/Login.vue';
 import RegisterView from '~/components/pageComponents/home/Register.vue';
-import UserRepo from '~/repositories/userRepository/index';
+import * as UserRepo from '~/repositories/userRepository/index';
 import type { CurrentForm, LoginForm, RegisterForm } from '@/types';
 import { useNotify } from '~/composables/useNotify';
 import { useAuthStore } from '@/stores/auth';

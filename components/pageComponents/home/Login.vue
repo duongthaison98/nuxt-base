@@ -25,7 +25,7 @@
       </form>
       <div class="register-forget mt-[50px]">
         <a href="javascript:void(0)"  @click="changeCurrentForm('register')" class="btn-register-forget">Đăng ký tài khoản</a>
-        <a href="javascript:void(0)" class="btn-register-forget mb-0">Quên mật khẩu</a>
+        <!-- <a href="javascript:void(0)" class="btn-register-forget mb-0">Quên mật khẩu</a> -->
       </div>
     </div>
   </div>

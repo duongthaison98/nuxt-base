@@ -31,11 +31,11 @@
 import Header from '~/components/layout/Header.vue';
 import LiveScreen from '~/components/pageComponents/livestream/LiveScreen.vue';
 import LiveChat from '~/components/pageComponents/livestream/LiveChat.vue';
-import LiveRepo from '~/repositories/liveRepository/index';
-import type { ListComments, PayloadChat, ListVideo, VideoData } from '@/types';
+import * as LiveRepo from '~/repositories/liveRepository/index';
+import type { ListComments, PayloadChat, ListVideo, VideoData, ParamMessage } from '@/types';
 import { useNotify } from '@/composables/useNotify'
 
-const paramComments = ref<{last_time: number | string, size: number}>({
+const paramComments = ref<ParamMessage>({
   last_time: '',
   size: 50
 })

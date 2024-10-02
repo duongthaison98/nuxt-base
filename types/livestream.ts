@@ -19,6 +19,11 @@ export interface PayloadChat {
   text_color: string;
 }
 
+export interface ParamMessage {
+  last_time: number | string;
+  size: number;
+}
+
 export interface VideoData {
   video_id: string;
   short_uuid: string;
