@@ -4,7 +4,7 @@
       <NuxtImg class="mr-3" src="/images/video.svg" width="20" height="20" alt="" />
       <span>live chat</span>
     </div>
-    <div class="chat-list flex-1 overflow-y-scroll">
+    <div class="chat-list flex-1 overflow-y-scroll" ref="chatList">
       <div 
         class="chat-item" 
         v-for="(item, index) in lstComments" 
@@ -69,4 +69,14 @@ const onSendChat = () => {
 
   emit('onSendChat', chatValue.value, chatStore.chatColor);
 };
+
+const chatList = ref<HTMLElement | null>(null);
+const scrollToBottom = () => {
+  if (chatList.value) {
+    chatList.value.scrollTop = chatList.value.scrollHeight;
+  }
+};
+onMounted(() => {
+  scrollToBottom();
+})
 </script>
